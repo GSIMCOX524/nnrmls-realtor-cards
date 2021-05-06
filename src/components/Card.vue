@@ -80,8 +80,8 @@
             /
             <label for="cardYear" class="card-item__dateItem">
               <transition name="slide-fade-up">
-                <span v-if="labels.cardYear" :key="labels.cardYear">{{String(labels.cardYear).slice(2,4)}}</span>
-                <span v-else key="2">{{ $t('card.YY') }}</span>
+                <span v-if="labels.cardYear" :key="labels.cardYear">{{String(labels.cardYear).slice(0,4)}}</span>
+                <span v-else key="4">{{ $t('card.YY') }}</span>
               </transition>
             </label>
           </div>

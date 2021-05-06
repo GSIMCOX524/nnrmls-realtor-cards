@@ -49,22 +49,6 @@
       <div class="card-form__row">
         <div class="card-form__col">
           <div class="card-form__group">
-            <label for="cardMonth" class="card-input__label">{{ $t('cardForm.expirationDate') }}</label>
-            <select
-              class="card-input__input -select"
-              :id="fields.cardMonth"
-              v-model="formData.cardMonth"
-              @change="changeMonth"
-              data-card-field
-            >
-              <option value disabled selected>{{ $t('cardForm.month') }}</option>
-              <option
-                v-bind:value="n < 10 ? '0' + n : n"
-                v-for="n in 12"
-                v-bind:disabled="n < minCardMonth"
-                v-bind:key="n"
-              >{{generateMonthValue(n)}}</option>
-            </select>
             <select
               class="card-input__input -select"
               :id="fields.cardYear"
@@ -74,10 +58,10 @@
             >
               <option value disabled selected>{{ $t('cardForm.year') }}</option>
               <option
-                v-bind:value="$index + minCardYear"
-                v-for="(n, $index) in 12"
+                v-bind:value="$index - minCardYear"
+                v-for="(n, $index) in 50"
                 v-bind:key="n"
-              >{{$index + minCardYear}}</option>
+              >{{$index - minCardYear}}</option>
             </select>
           </div>
         </div>
