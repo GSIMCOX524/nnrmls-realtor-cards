@@ -1,7 +1,7 @@
 {
   "message": "hello i18n !!",
   "card": {
-    "cardHolder": "REALTOR ID Holder",
+    "cardHolder": "REALTOR Name",
     "fullName": "Full Name",
     "expires": "REALTOR Since",
     "MM": "MM",
@@ -9,7 +9,7 @@
   },
   "cardForm": {
     "cardNumber": "REALTOR ID Number",
-    "cardName": "Card Name",
+    "cardName": "REALTOR Name",
     "expirationDate": "REALTOR Since",
     "month": "Month",
     "year": "Year",

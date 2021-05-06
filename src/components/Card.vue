@@ -71,13 +71,6 @@
           </label>
           <div class="card-item__date" ref="cardDate">
             <label :for="fields.cardMonth" class="card-item__dateTitle">{{ $t('card.expires') }}</label>
-            <label :for="fields.cardMonth" class="card-item__dateItem">
-              <transition name="slide-fade-up">
-                <span v-if="labels.cardMonth" :key="labels.cardMonth">{{labels.cardMonth}}</span>
-                <span v-else key="2">{{ $t('card.MM') }}</span>
-              </transition>
-            </label>
-            /
             <label for="cardYear" class="card-item__dateItem">
               <transition name="slide-fade-up">
                 <span v-if="labels.cardYear" :key="labels.cardYear">{{String(labels.cardYear).slice(0,4)}}</span>

@@ -49,6 +49,7 @@
       <div class="card-form__row">
         <div class="card-form__col">
           <div class="card-form__group">
+            <label for="cardMonth" class="card-input__label">{{ $t('cardForm.expirationDate') }}</label>
             <select
               class="card-input__input -select"
               :id="fields.cardYear"
@@ -58,10 +59,10 @@
             >
               <option value disabled selected>{{ $t('cardForm.year') }}</option>
               <option
-                v-bind:value="$index - minCardYear"
+                v-bind:value="minCardYear - $index"
                 v-for="(n, $index) in 50"
                 v-bind:key="n"
-              >{{$index - minCardYear}}</option>
+              >{{minCardYear - $index}}</option>
             </select>
           </div>
         </div>
