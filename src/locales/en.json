@@ -14,7 +14,9 @@
     "month": "Month",
     "year": "Year",
     "CVV": "CVV",
-    "submit": "Submit",
+    "downloadPNG": "Download as PNG",
+    "downloadJPG": "Download as JPG",
+    "purchasePhysical": "Buy a Physical Card",
     "invalidCardNumber": "Invalid Card Number"
   }
 }

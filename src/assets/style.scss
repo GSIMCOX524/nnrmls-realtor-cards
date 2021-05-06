@@ -109,7 +109,7 @@ body {
     font-family: "Source Sans Pro", sans-serif;
     box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
     color: #fff;
-    margin-top: 20px;
+    margin-top: 10px;
     cursor: pointer;
 
     @media screen and (max-width: 480px) {
@@ -118,18 +118,35 @@ body {
   }
 }
 
+.purchase__button {
+  background: #13b451;
+}
+
+.card-layout__options {
+  text-align: center;
+  .card-layout__options__button {
+    color: #2364d2;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+  }
+}
+
 .card-item {
-  max-width: 430px;
-  height: 270px;
+  max-width: 445px;
+  height: 318px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   z-index: 2;
   width: 100%;
+  transition: all 0.2s ease-in-out;
 
   @media screen and (max-width: 480px) {
-    max-width: 310px;
-    height: 220px;
+    max-width: 322px;
+    height: 259px;
     width: 90%;
   }
 
@@ -183,7 +200,7 @@ body {
   }
 
   &__side {
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: hidden;
     // box-shadow: 3px 13px 30px 0px rgba(11, 19, 41, 0.5);
     box-shadow: 0 20px 60px 0 rgba(14, 42, 90, 0.55);
@@ -232,7 +249,7 @@ body {
     left: 0;
     top: 0;
     width: 100%;
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: hidden;
     &:after {
       content: "";
@@ -408,11 +425,12 @@ body {
     flex-wrap: wrap;
     font-size: 18px;
     margin-left: auto;
-    padding: 10px;
+    padding: 10px 15px;
     display: inline-flex;
-    width: 80px;
+    width: 50%;
     white-space: nowrap;
     flex-shrink: 0;
+    text-align: right;
     cursor: pointer;
 
     @media screen and (max-width: 480px) {
@@ -422,8 +440,9 @@ body {
 
   &__dateItem {
     position: relative;
+    width: 100%;
     span {
-      width: 22px;
+      width: 44px;
       display: inline-block;
     }
   }
@@ -526,7 +545,7 @@ body {
     border-radius: 5px;
     box-shadow: none;
     border: 1px solid #ced6e0;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     font-size: 18px;
     padding: 5px 15px;
     background: none;

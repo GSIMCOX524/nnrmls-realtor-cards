@@ -10,6 +10,11 @@
       />
     </div>
     <div class="card-form__inner">
+      <div class="card-input card-layout__options">
+        <button @click="switchToHorizontal" type="text" href="" class="card-layout__options__button">Horizontal</button>
+        &nbsp;|&nbsp;
+        <button @click="switchToVertical" type="text" class="card-layout__options__button">Vertical</button>
+        </div>
       <div class="card-input">
         <label for="cardNumber" class="card-input__label">{{ $t('cardForm.cardNumber') }}</label>
         <input
@@ -84,7 +89,9 @@
         </div>
       </div>
 
-      <button class="card-form__button" v-on:click="invaildCard">{{ $t('cardForm.submit') }}</button>
+      <button class="card-form__button" v-on:click="invaildCard">{{ $t('cardForm.downloadPNG') }}</button>
+      <button class="card-form__button" v-on:click="invaildCard">{{ $t('cardForm.downloadJPG') }}</button>
+      <button class="card-form__button purchase__button" v-on:click="invaildCard">{{ $t('cardForm.purchasePhysical') }}</button>
     </div>
   </div>
 </template>
@@ -175,6 +182,16 @@ export default {
   methods: {
     generateMonthValue (n) {
       return n < 10 ? `0${n}` : n
+    },
+    switchToHorizontal () {
+      var originalCardItem = document.getElementById('card-item-object')
+      originalCardItem.style.height = '318px'
+      originalCardItem.style.maxWidth = '445px'
+    },
+    switchToVertical () {
+      var originalCardItem = document.getElementById('card-item-object')
+      originalCardItem.style.height = '445px'
+      originalCardItem.style.maxWidth = '318px'
     },
     changeName (e) {
       this.formData.cardName = e.target.value

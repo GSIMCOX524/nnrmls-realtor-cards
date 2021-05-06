@@ -1,5 +1,5 @@
 <template>
-  <div class="card-item" :class="{ '-active' : isCardFlipped }">
+  <div id="card-item-object" class="card-item" :class="{ '-active' : isCardFlipped }">
     <div class="card-item__side -front">
       <div
         class="card-item__focus"
@@ -74,7 +74,7 @@
             <label for="cardYear" class="card-item__dateItem">
               <transition name="slide-fade-up">
                 <span v-if="labels.cardYear" :key="labels.cardYear">{{String(labels.cardYear).slice(0,4)}}</span>
-                <span v-else key="4">{{ $t('card.YY') }}</span>
+                <span v-else key="2">{{ $t('card.YY') }}</span>
               </transition>
             </label>
           </div>
@@ -200,14 +200,15 @@ export default {
       return '' // default type
     },
     currentCardBackground () {
-      if (this.randomBackgrounds && !this.backgroundImage) { // TODO will be optimized
+      /* if (this.randomBackgrounds && !this.backgroundImage) { // TODO will be optimized
         let random = Math.floor(Math.random() * 25 + 1)
         return `https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/${random}.jpeg`
       } else if (this.backgroundImage) {
         return this.backgroundImage
       } else {
         return null
-      }
+      } */
+      return null
     }
   },
   methods: {
