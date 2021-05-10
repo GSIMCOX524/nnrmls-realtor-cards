@@ -11,10 +11,8 @@
     </div>
     <div class="card-form__inner">
       <div class="card-input card-layout__options">
-        <button @click="switchToHorizontal" type="text" href="" class="card-layout__options__button">Horizontal</button>
-        &nbsp;|&nbsp;
-        <button @click="switchToVertical" type="text" class="card-layout__options__button">Vertical</button>
-        </div>
+        <button @click="flipCard" type="text" class="card-layout__options__button">Flip</button>
+      </div>
         <div class="card-input">
         <label id="photoUploadLabel" class="card-input__label">{{ $t('cardForm.photoUpload') }}</label>
         <input
@@ -100,7 +98,7 @@
         </div>
       </div>
 
-      <button class="card-form__button" v-on:click="invaildCard">{{ $t('cardForm.downloadPNG') }}</button>
+      <button id="downloadAsPNGBtn" class="card-form__button" @click="downloadCardAsPNG">{{ $t('cardForm.downloadPNG') }}</button>
       <button class="card-form__button purchase__button" v-on:click="invaildCard">{{ $t('cardForm.purchasePhysical') }}</button>
     </div>
   </div>
@@ -108,6 +106,8 @@
 
 <script>
 import Card from '@/components/Card'
+import domtoimage from 'dom-to-image'
+import { saveAs } from 'file-saver'
 export default {
   name: 'CardForm',
   directives: {
@@ -215,6 +215,18 @@ export default {
       photoUploadLabel.innerHTML = 'Upload a Photo <span style=color:#13b451;font-weight:600>('.concat(uploadedFileName).concat(')</span>')
       cardCover.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')
     },
+    downloadCardAsPNG () {
+      var nameOnCard = document.getElementById('v-card-name').value
+      var downloadAsPNGBtn = document.getElementById('downloadAsPNGBtn')
+      downloadAsPNGBtn.innerHTML = 'Downloading...'
+      domtoimage.toBlob(document.getElementById('card-front-instance'))
+        .then(function (blob) {
+          saveAs(blob, ''.concat(nameOnCard).concat(' – Realtor Team Card.png'))
+        })
+      setTimeout(function () {
+        downloadAsPNGBtn.innerHTML = 'Download as PNG'
+      }, 2000)
+    },
     changeName (e) {
       this.formData.cardName = e.target.value
       this.$emit('input-card-name', this.formData.cardName)
@@ -250,6 +262,14 @@ export default {
     changeCvv (e) {
       this.formData.cardCvv = e.target.value
       this.$emit('input-card-cvv', this.formData.cardCvv)
+    },
+    flipCard () {
+      var cardItemObject = document.getElementById('card-item-object')
+      if (cardItemObject.classList.contains('-active')) {
+        cardItemObject.classList.remove('-active')
+      } else {
+        cardItemObject.classList.add('-active')
+      }
     },
     invaildCard () {
       let number = this.formData.cardNumberNotMask.replace(/ /g, '')

@@ -1,6 +1,6 @@
 <template>
   <div id="card-item-object" class="card-item" :class="{ '-active' : isCardFlipped }">
-    <div class="card-item__side -front">
+    <div id="card-front-instance" class="card-item__side -front">
       <div
         class="card-item__focus"
         :class="{'-active' : focusElementStyle }"
@@ -81,7 +81,7 @@
         </div>
       </div>
     </div>
-    <div class="card-item__side -back">
+    <div id="card-back-instance" class="card-item__side -back">
       <div class="card-item__cover">
         <img
           v-if="currentCardBackground"

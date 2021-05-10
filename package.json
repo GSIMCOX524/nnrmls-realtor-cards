@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "core-js": "^3.3.2",
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.5",
     "vue": "^2.6.10",
     "vue-i18n": "^8.17.3"
   },
