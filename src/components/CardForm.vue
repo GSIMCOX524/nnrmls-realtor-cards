@@ -15,6 +15,17 @@
         &nbsp;|&nbsp;
         <button @click="switchToVertical" type="text" class="card-layout__options__button">Vertical</button>
         </div>
+        <div class="card-input">
+        <label id="photoUploadLabel" class="card-input__label">{{ $t('cardForm.photoUpload') }}</label>
+        <input
+          type="file"
+          :id="fields.photoUpload"
+          class="card-input__input"
+          hidden
+          @change="updateFileLabel"
+        />
+        <label :for="fields.photoUpload" id="photoUploadCustomTrigger" class="card-input__input">Choose File</label>
+      </div>
       <div class="card-input">
         <label for="cardNumber" class="card-input__label">{{ $t('cardForm.cardNumber') }}</label>
         <input
@@ -90,7 +101,6 @@
       </div>
 
       <button class="card-form__button" v-on:click="invaildCard">{{ $t('cardForm.downloadPNG') }}</button>
-      <button class="card-form__button" v-on:click="invaildCard">{{ $t('cardForm.downloadJPG') }}</button>
       <button class="card-form__button purchase__button" v-on:click="invaildCard">{{ $t('cardForm.purchasePhysical') }}</button>
     </div>
   </div>
@@ -151,6 +161,7 @@ export default {
   data () {
     return {
       fields: {
+        photoUpload: 'v-photo-upload',
         cardNumber: 'v-card-number',
         cardName: 'v-card-name',
         cardMonth: 'v-card-month',
@@ -192,6 +203,17 @@ export default {
       var originalCardItem = document.getElementById('card-item-object')
       originalCardItem.style.height = '445px'
       originalCardItem.style.maxWidth = '318px'
+    },
+    updateFileLabel () {
+      var photoUploadCustomTrigger = document.getElementById('photoUploadCustomTrigger')
+      var photoUploadLabel = document.getElementById('photoUploadLabel')
+      var photoUploadInput = document.getElementById('v-photo-upload')
+      var uploadedFileName = photoUploadInput.files[0].name
+      var uploadedFileObject = photoUploadInput.files[0]
+      var cardCover = document.getElementById('card-cover')
+      photoUploadCustomTrigger.innerHTML = 'Change File'
+      photoUploadLabel.innerHTML = 'Upload a Photo <span style=color:#13b451;font-weight:600>('.concat(uploadedFileName).concat(')</span>')
+      cardCover.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')
     },
     changeName (e) {
       this.formData.cardName = e.target.value

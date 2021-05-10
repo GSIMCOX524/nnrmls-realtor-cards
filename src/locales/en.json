@@ -8,6 +8,7 @@
     "YY": "YYYY"
   },
   "cardForm": {
+    "photoUpload": "Upload a Photo",
     "cardNumber": "REALTOR ID Number",
     "cardName": "REALTOR Name",
     "expirationDate": "REALTOR Since",

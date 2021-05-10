@@ -714,3 +714,23 @@ body {
     }
   }
 }
+
+// Begin custom CSS
+#photoUploadCustomTrigger {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background-color: #ced6e0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#card-cover {
+  background-size: cover;
+}
+
+#card-cover::after {
+  background: none!important;
+}

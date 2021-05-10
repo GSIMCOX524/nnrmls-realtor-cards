@@ -7,7 +7,7 @@
         :style="focusElementStyle"
         ref="focusElement"
       ></div>
-      <div class="card-item__cover">
+      <div id="card-cover" class="card-item__cover">
         <img
           v-if="currentCardBackground"
           :src="currentCardBackground"
