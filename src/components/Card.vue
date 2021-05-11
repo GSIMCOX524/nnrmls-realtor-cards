@@ -9,15 +9,15 @@
       ></div>
       <div id="card-cover" class="card-item__cover">
         <img
-          v-if="currentCardBackground"
-          :src="currentCardBackground"
+          v-if="currentCardBackgroundFront"
+          :src="currentCardBackgroundFront"
           class="card-item__bg"
         />
       </div>
       <div class="card-item__wrapper">
         <div class="card-item__top">
           <img
-            src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png"
+            src="https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/REALTOR-R.png"
             class="card-item__chip"
           />
           <div class="card-item__type">
@@ -32,7 +32,34 @@
             </transition>
           </div>
         </div>
-        <label :for="fields.cardNumber" class="card-item__number" :ref="fields.cardNumber">
+        <div class="card-item__content">
+          <label :for="fields.cardName" id="nameLabel" class="card-item__info" :ref="fields.cardName">
+            <transition name="slide-fade-up">
+              <div class="card-item__name" v-if="labels.cardName.length" key="1">
+                <transition-group name="slide-fade-right">
+                  <span
+                    class="card-item__nameItem"
+                    v-for="(n, $index) in labels.cardName.replace(/\s\s+/g, ' ')"
+                    :key="$index + 1"
+                  >{{n}}</span>
+                </transition-group>
+              </div>
+              <div class="card-item__name" v-else key="2">{{ $t('card.fullName') }}</div>
+            </transition>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id="card-back-instance" class="card-item__side -back">
+      <div id="card-back-cover" class="card-item__cover">
+        <img
+          v-if="currentCardBackgroundBack"
+          :src="currentCardBackgroundBack"
+          class="card-item__bg"
+        />
+      </div>
+      <div class="card-item__content">
+      <label :for="fields.cardNumber" class="card-item__number" :ref="fields.cardNumber">
           <template>
             <span v-for="(n, $index) in currentPlaceholder" :key="$index">
               <transition name="slide-fade-up">
@@ -53,23 +80,7 @@
             </span>
           </template>
         </label>
-        <div class="card-item__content">
-          <label :for="fields.cardName" class="card-item__info" :ref="fields.cardName">
-            <div class="card-item__holder">{{ $t('card.cardHolder') }}</div>
-            <transition name="slide-fade-up">
-              <div class="card-item__name" v-if="labels.cardName.length" key="1">
-                <transition-group name="slide-fade-right">
-                  <span
-                    class="card-item__nameItem"
-                    v-for="(n, $index) in labels.cardName.replace(/\s\s+/g, ' ')"
-                    :key="$index + 1"
-                  >{{n}}</span>
-                </transition-group>
-              </div>
-              <div class="card-item__name" v-else key="2">{{ $t('card.fullName') }}</div>
-            </transition>
-          </label>
-          <div class="card-item__date" ref="cardDate">
+        <div class="card-item__date" ref="cardDate">
             <label :for="fields.cardMonth" class="card-item__dateTitle">{{ $t('card.expires') }}</label>
             <label for="cardYear" class="card-item__dateItem">
               <transition name="slide-fade-up">
@@ -79,17 +90,6 @@
             </label>
           </div>
         </div>
-      </div>
-    </div>
-    <div id="card-back-instance" class="card-item__side -back">
-      <div id="card-back-cover" class="card-item__cover">
-        <img
-          v-if="currentCardBackground"
-          :src="currentCardBackground"
-          class="card-item__bg"
-        />
-      </div>
-      <div class="card-item__band"></div>
       <div class="card-item__cvv">
         <div class="card-item__cvvTitle">CVV</div>
         <div class="card-item__cvvBand">
@@ -199,8 +199,11 @@ export default {
 
       return '' // default type
     },
-    currentCardBackground () {
-      return null
+    currentCardBackgroundFront () {
+      return 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Card-Template-Front.png'
+    },
+    currentCardBackgroundBack () {
+      return 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Card-Template-Back.png'
     }
   },
   methods: {

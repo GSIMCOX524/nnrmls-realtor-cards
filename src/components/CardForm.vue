@@ -22,7 +22,20 @@
           hidden
           @change="updateFileLabel"
         />
-        <label :for="fields.photoUpload" id="photoUploadCustomTrigger" class="card-input__input">Choose File</label>
+        <label :for="fields.photoUpload" id="photoUploadCustomTrigger" class="card-input__input">Choose Photo</label>
+      </div>
+      <div class="card-input">
+        <label for="cardName" class="card-input__label">{{ $t('cardForm.cardName') }}</label>
+        <input
+          type="text"
+          :id="fields.cardName"
+          v-letter-only
+          @input="changeName"
+          class="card-input__input"
+          :value="formData.cardName"
+          data-card-field
+          autocomplete="off"
+        />
       </div>
       <div class="card-input">
         <label for="cardNumber" class="card-input__label">{{ $t('cardForm.cardNumber') }}</label>
@@ -46,19 +59,6 @@
           :disabled="formData.cardNumber === ''"
           @click="toggleMask"
         ></button>
-      </div>
-      <div class="card-input">
-        <label for="cardName" class="card-input__label">{{ $t('cardForm.cardName') }}</label>
-        <input
-          type="text"
-          :id="fields.cardName"
-          v-letter-only
-          @input="changeName"
-          class="card-input__input"
-          :value="formData.cardName"
-          data-card-field
-          autocomplete="off"
-        />
       </div>
       <div class="card-form__row">
         <div class="card-form__col">
@@ -212,7 +212,7 @@ export default {
       var uploadedFileObject = photoUploadInput.files[0]
       var cardCoverFront = document.getElementById('card-cover')
       var cardCoverBack = document.getElementById('card-back-cover')
-      photoUploadCustomTrigger.innerHTML = 'Change File'
+      photoUploadCustomTrigger.innerHTML = 'Change Photo'
       photoUploadLabel.innerHTML = 'Upload a Photo <span style=color:#13b451;font-weight:600>('.concat(uploadedFileName).concat(')</span>')
       cardCoverFront.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')
       cardCoverBack.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')

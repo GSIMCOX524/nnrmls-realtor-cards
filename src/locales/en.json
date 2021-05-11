@@ -1,17 +1,17 @@
 {
   "message": "hello i18n !!",
   "card": {
-    "cardHolder": "REALTOR Name",
+    "cardHolder": "REALTOR® Name",
     "fullName": "Full Name",
-    "expires": "REALTOR Since",
+    "expires": "REALTOR® Since",
     "MM": "MM",
     "YY": "YYYY"
   },
   "cardForm": {
     "photoUpload": "Upload a Photo",
-    "cardNumber": "REALTOR ID Number",
-    "cardName": "REALTOR Name",
-    "expirationDate": "REALTOR Since",
+    "cardNumber": "REALTOR® ID Number",
+    "cardName": "REALTOR® Name",
+    "expirationDate": "REALTOR® Since",
     "month": "Month",
     "year": "Year",
     "CVV": "CVV",
