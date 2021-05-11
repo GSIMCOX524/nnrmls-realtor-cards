@@ -136,8 +136,8 @@ body {
 }
 
 .card-item {
-  max-width: 445px;
-  height: 318px;
+  max-width: 318px;
+  height: 445px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -734,11 +734,11 @@ body {
   border: none!important;
 }
 
-#card-cover {
+#card-cover, #card-back-cover {
   background-size: cover;
 }
 
-#card-cover::after {
+#card-cover::after, #card-back-cover::after {
   background: none!important;
 }
 

@@ -210,10 +210,12 @@ export default {
       var photoUploadInput = document.getElementById('v-photo-upload')
       var uploadedFileName = photoUploadInput.files[0].name
       var uploadedFileObject = photoUploadInput.files[0]
-      var cardCover = document.getElementById('card-cover')
+      var cardCoverFront = document.getElementById('card-cover')
+      var cardCoverBack = document.getElementById('card-back-cover')
       photoUploadCustomTrigger.innerHTML = 'Change File'
       photoUploadLabel.innerHTML = 'Upload a Photo <span style=color:#13b451;font-weight:600>('.concat(uploadedFileName).concat(')</span>')
-      cardCover.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')
+      cardCoverFront.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')
+      cardCoverBack.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')
     },
     downloadCardAsPNG () {
       var nameOnCard = document.getElementById('v-card-name').value

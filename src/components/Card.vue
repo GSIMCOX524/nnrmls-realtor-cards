@@ -82,7 +82,7 @@
       </div>
     </div>
     <div id="card-back-instance" class="card-item__side -back">
-      <div class="card-item__cover">
+      <div id="card-back-cover" class="card-item__cover">
         <img
           v-if="currentCardBackground"
           :src="currentCardBackground"
@@ -200,14 +200,6 @@ export default {
       return '' // default type
     },
     currentCardBackground () {
-      /* if (this.randomBackgrounds && !this.backgroundImage) { // TODO will be optimized
-        let random = Math.floor(Math.random() * 25 + 1)
-        return `https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/${random}.jpeg`
-      } else if (this.backgroundImage) {
-        return this.backgroundImage
-      } else {
-        return null
-      } */
       return null
     }
   },
