@@ -17,6 +17,10 @@
       <div class="card-item__wrapper">
         <div class="card-item__top">
           <img
+            src="https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Card-Template-Photo-Placeholder.png"
+            id="cardUploadedPhoto"
+          />
+          <img
             src="https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/REALTOR-R.png"
             class="card-item__chip"
           />
@@ -35,14 +39,7 @@
         <div class="card-item__content">
           <label :for="fields.cardName" id="nameLabel" class="card-item__info" :ref="fields.cardName">
             <transition name="slide-fade-up">
-              <div class="card-item__name" v-if="labels.cardName.length" key="1">
-                <transition-group name="slide-fade-right">
-                  <span
-                    class="card-item__nameItem"
-                    v-for="(n, $index) in labels.cardName.replace(/\s\s+/g, ' ')"
-                    :key="$index + 1"
-                  >{{n}}</span>
-                </transition-group>
+              <div class="card-item__name" id="customNameHandler" v-if="labels.cardName.length" key="1">
               </div>
               <div class="card-item__name" v-else key="2">{{ $t('card.fullName') }}</div>
             </transition>

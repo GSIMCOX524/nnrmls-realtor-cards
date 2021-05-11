@@ -210,28 +210,46 @@ export default {
       var photoUploadInput = document.getElementById('v-photo-upload')
       var uploadedFileName = photoUploadInput.files[0].name
       var uploadedFileObject = photoUploadInput.files[0]
-      var cardCoverFront = document.getElementById('card-cover')
-      var cardCoverBack = document.getElementById('card-back-cover')
+      var photoArea = document.getElementById('cardUploadedPhoto')
       photoUploadCustomTrigger.innerHTML = 'Change Photo'
-      photoUploadLabel.innerHTML = 'Upload a Photo <span style=color:#13b451;font-weight:600>('.concat(uploadedFileName).concat(')</span>')
-      cardCoverFront.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')
-      cardCoverBack.style.backgroundImage = 'url('.concat(window.URL.createObjectURL(uploadedFileObject)).concat(')')
+      photoUploadLabel.innerHTML = 'Upload a Photo&nbsp;&nbsp;–&nbsp;<span style=color:#13b451;font-weight:600>&nbsp;'.concat(uploadedFileName).concat('&nbsp;&nbsp;&#10004;</span>')
+      photoArea.src = window.URL.createObjectURL(uploadedFileObject)
     },
     downloadCardAsPNG () {
       var nameOnCard = document.getElementById('v-card-name').value
+      var fileName = 'blob'
+      if (nameOnCard) {
+        fileName = ''.concat(nameOnCard).concat(' – Realtor Team Card.png')
+      } else {
+        fileName = 'Realtor Team Card.png'
+      }
       var downloadAsPNGBtn = document.getElementById('downloadAsPNGBtn')
       downloadAsPNGBtn.innerHTML = 'Downloading...'
       domtoimage.toBlob(document.getElementById('card-front-instance'))
         .then(function (blob) {
-          saveAs(blob, ''.concat(nameOnCard).concat(' – Realtor Team Card.png'))
+          saveAs(blob, fileName)
         })
       setTimeout(function () {
         downloadAsPNGBtn.innerHTML = 'Download as PNG'
       }, 2000)
     },
+    toProperCase (string) {
+      return string.replace(/\w\S*/g, function (text) {
+        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase()
+      })
+    },
+    getFirstWord (string) {
+      let spaceIndex = string.indexOf(' ')
+      return spaceIndex === -1 ? string : string.substr(0, spaceIndex)
+    },
+    getFirstSpaceLocation (string) {
+      return string.indexOf(' ')
+    },
     changeName (e) {
-      this.formData.cardName = e.target.value
-      this.$emit('input-card-name', this.formData.cardName)
+      this.formData.cardName = this.toProperCase(e.target.value)
+      this.$emit('input-card-name', this.toProperCase(this.formData.cardName))
+      var customNameDisplay = document.getElementById('customNameHandler')
+      customNameDisplay.innerHTML = '<span id=italicFirst>'.concat(this.getFirstWord(this.formData.cardName)).concat('</span>').concat(' test')
     },
     changeNumber (e) {
       this.formData.cardNumber = e.target.value

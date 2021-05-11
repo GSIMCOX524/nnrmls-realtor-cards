@@ -136,8 +136,8 @@ body {
 }
 
 .card-item {
-  max-width: 318px;
-  height: 445px;
+  max-width: 375px;
+  height: 525px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -280,6 +280,9 @@ body {
 
   &__chip {
     width: 60px;
+    position: fixed;
+    top: 25px;
+    left: 30px;
     @media screen and (max-width: 480px) {
       width: 50px;
     }
@@ -316,7 +319,6 @@ body {
   &__info {
     color: #fff;
     width: 100%;
-    max-width: calc(100% - 85px);
     padding: 10px 15px;
     font-weight: 500;
     display: block;
@@ -361,7 +363,6 @@ body {
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-transform: uppercase;
     @media screen and (max-width: 480px) {
       font-size: 16px;
     }
@@ -750,8 +751,8 @@ button:hover {
 }
 
 #nameLabel {
-  position: fixed;
-  bottom: 60px;
+  position: relative;
+  bottom: 10px;
   text-shadow: none;
 }
 
@@ -764,4 +765,15 @@ button:hover {
   font-size: 20px;
   margin-left: 15px;
   font-family: 'Source Code Pro', sans-serif;
+}
+
+#cardUploadedPhoto {
+  width: 250px;
+  border: 8px solid #fff;
+  border-radius: 5px;
+  position: relative;
+  left: 33px;
+  top: 17px;
+  height: 360px;
+  object-fit: cover;
 }
