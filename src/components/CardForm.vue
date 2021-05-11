@@ -225,7 +225,7 @@ export default {
       }
       var downloadAsPNGBtn = document.getElementById('downloadAsPNGBtn')
       downloadAsPNGBtn.innerHTML = 'Downloading...'
-      domtoimage.toBlob(document.getElementById('card-front-instance'))
+      domtoimage.toBlob(document.getElementById('card-front-instance'), { width: 375, height: 525 })
         .then(function (blob) {
           saveAs(blob, fileName)
         })
