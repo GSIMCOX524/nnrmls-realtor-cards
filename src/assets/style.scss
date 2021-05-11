@@ -146,9 +146,8 @@ body {
   transition: all 0.2s ease-in-out;
 
   @media screen and (max-width: 480px) {
-    max-width: 322px;
-    height: 259px;
-    width: 90%;
+    max-width: 375px;
+    height: 525px;
   }
 
   @media screen and (max-width: 360px) {
