@@ -35,30 +35,8 @@
           :value="formData.cardName"
           data-card-field
           autocomplete="off"
+          spellcheck="false"
         />
-      </div>
-      <div class="card-input">
-        <label for="cardNumber" class="card-input__label">{{ $t('cardForm.cardNumber') }}</label>
-        <input
-          type="tel"
-          :id="fields.cardNumber"
-          @input="changeNumber"
-          @focus="focusCardNumber"
-          @blur="blurCardNumber"
-          class="card-input__input"
-          :value="formData.cardNumber"
-          :maxlength="cardNumberMaxLength"
-          data-card-field
-          autocomplete="off"
-        />
-        <button
-          class="card-input__eye"
-          :class="{ '-active' : !isCardNumberMasked }"
-          title="Show/Hide card number"
-          tabindex="-1"
-          :disabled="formData.cardNumber === ''"
-          @click="toggleMask"
-        ></button>
       </div>
       <div class="card-form__row">
         <div class="card-form__col">
@@ -74,7 +52,7 @@
               <option value disabled selected>{{ $t('cardForm.year') }}</option>
               <option
                 v-bind:value="minCardYear - $index"
-                v-for="(n, $index) in 50"
+                v-for="(n, $index) in 75"
                 v-bind:key="n"
               >{{minCardYear - $index}}</option>
             </select>
@@ -87,19 +65,41 @@
               type="tel"
               class="card-input__input"
               v-number-only
-              :id="fields.cardCvv"
-              maxlength="4"
-              :value="formData.cardCvv"
-              @input="changeCvv"
+              :id="fields.cardRealtorID"
+              @input="changeRealtorID"
               data-card-field
               autocomplete="off"
             />
           </div>
         </div>
       </div>
+      <div class="card-input">
+        <label for="cardName" class="card-input__label">{{ $t('cardForm.designations') }}</label>
+        <input
+          type="text"
+          :id="fields.cardDesignations"
+          @input="changeDesignations"
+          class="card-input__input"
+          data-card-field
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+      <div class="card-input">
+        <label for="cardName" class="card-input__label">{{ $t('cardForm.businessBackground') }}</label>
+        <input
+          type="text"
+          :id="fields.cardBusinessBackground"
+          @input="changeBusinessBackground"
+          class="card-input__input"
+          data-card-field
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
 
       <button id="downloadAsPNGBtn" class="card-form__button" @click="downloadCardAsPNG">{{ $t('cardForm.downloadPNG') }}</button>
-      <button class="card-form__button purchase__button" v-on:click="invaildCard">{{ $t('cardForm.purchasePhysical') }}</button>
+      <button id="purchaseBtn" class="card-form__button purchase__button" disabled v-on:click="invaildCard">{{ $t('cardForm.purchasePhysical') }}</button>
     </div>
   </div>
 </template>
@@ -141,6 +141,9 @@ export default {
       default: () => {
         return {
           cardName: '',
+          cardDesignations: '',
+          cardBusinessBackground: '',
+          cardRealtorID: '',
           cardNumber: '',
           cardNumberNotMask: '',
           cardMonth: '',
@@ -164,6 +167,9 @@ export default {
         photoUpload: 'v-photo-upload',
         cardNumber: 'v-card-number',
         cardName: 'v-card-name',
+        cardDesignations: 'v-card-designations',
+        cardBusinessBackground: 'v-card-business-background',
+        cardRealtorID: 'v-card-realtor-id',
         cardMonth: 'v-card-month',
         cardYear: 'v-card-year',
         cardCvv: 'v-card-cvv'
@@ -217,17 +223,26 @@ export default {
     },
     downloadCardAsPNG () {
       var nameOnCard = document.getElementById('v-card-name').value
-      var fileName = 'blob'
+      var frontFileName = 'blob'
+      var backFileName = 'blob'
       if (nameOnCard) {
-        fileName = ''.concat(nameOnCard).concat(' – Realtor Team Card.png')
+        frontFileName = nameOnCard.concat(' – Realtor Team Card (FRONT).png')
+        backFileName = nameOnCard.concat(' – Realtor Team Card (BACK).png')
       } else {
-        fileName = 'Realtor Team Card.png'
+        frontFileName = 'Realtor Team Card (FRONT).png'
+        backFileName = 'Realtor Team Card (BACK).png'
       }
       var downloadAsPNGBtn = document.getElementById('downloadAsPNGBtn')
       downloadAsPNGBtn.innerHTML = 'Downloading...'
       domtoimage.toBlob(document.getElementById('card-front-instance'), { width: 375, height: 525 })
         .then(function (blob) {
-          saveAs(blob, fileName)
+          saveAs(blob, frontFileName)
+          console.log('Front of card downloaded as PNG')
+        })
+      domtoimage.toBlob(document.getElementById('card-back-instance'), { width: 375, height: 525 })
+        .then(function (blob) {
+          saveAs(blob, backFileName)
+          console.log('Back of card downloaded as PNG')
         })
       setTimeout(function () {
         downloadAsPNGBtn.innerHTML = 'Download as PNG'
@@ -238,18 +253,33 @@ export default {
         return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase()
       })
     },
-    getFirstWord (string) {
+    spliceName (string) {
       let spaceIndex = string.indexOf(' ')
-      return spaceIndex === -1 ? string : string.substr(0, spaceIndex)
-    },
-    getFirstSpaceLocation (string) {
-      return string.indexOf(' ')
+      return spaceIndex === -1 ? string : '<span id=italicFirst>'.concat(string.substr(0, spaceIndex)).concat('</span>').concat(string.substr(spaceIndex + 1))
     },
     changeName (e) {
       this.formData.cardName = this.toProperCase(e.target.value)
       this.$emit('input-card-name', this.toProperCase(this.formData.cardName))
       var customNameDisplay = document.getElementById('customNameHandler')
-      customNameDisplay.innerHTML = '<span id=italicFirst>'.concat(this.getFirstWord(this.formData.cardName)).concat('</span>').concat(' test')
+      customNameDisplay.innerHTML = this.spliceName(this.formData.cardName)
+    },
+    changeDesignations (e) {
+      this.formData.cardDesignations = e.target.value
+      this.$emit('input-card-designations', this.formData.cardDesignations)
+      var designationsOutput = document.getElementById('designations')
+      designationsOutput.innerHTML = this.formData.cardDesignations
+    },
+    changeBusinessBackground (e) {
+      this.formData.cardBusinessBackground = e.target.value
+      this.$emit('input-card-business-background', this.formData.cardBusinessBackground)
+      var businessBackgroundOutput = document.getElementById('businessBackground')
+      businessBackgroundOutput.innerHTML = this.formData.cardBusinessBackground
+    },
+    changeRealtorID (e) {
+      this.formData.cardRealtorID = e.target.value
+      this.$emit('input-card-realtor-id', this.formData.cardRealtorID)
+      var realtorIDOutput = document.getElementById('realtorID')
+      realtorIDOutput.innerHTML = this.formData.cardRealtorID
     },
     changeNumber (e) {
       this.formData.cardNumber = e.target.value

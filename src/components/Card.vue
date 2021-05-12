@@ -41,7 +41,7 @@
             <transition name="slide-fade-up">
               <div class="card-item__name" id="customNameHandler" v-if="labels.cardName.length" key="1">
               </div>
-              <div class="card-item__name" v-else key="2">{{ $t('card.fullName') }}</div>
+              <div class="card-item__name" v-else key="2"><span id="italicFirst">Full</span>Name</div>
             </transition>
           </label>
         </div>
@@ -55,50 +55,35 @@
           class="card-item__bg"
         />
       </div>
-      <div class="card-item__content">
-      <label :for="fields.cardNumber" class="card-item__number" :ref="fields.cardNumber">
-          <template>
-            <span v-for="(n, $index) in currentPlaceholder" :key="$index">
-              <transition name="slide-fade-up">
-                <div class="card-item__numberItem" v-if="getIsNumberMasked($index, n)">*</div>
-                <div
-                  class="card-item__numberItem"
-                  :class="{ '-active' : n.trim() === '' }"
-                  :key="currentPlaceholder"
-                  v-else-if="labels.cardNumber.length > $index"
-                >{{labels.cardNumber[$index]}}</div>
-                <div
-                  class="card-item__numberItem"
-                  :class="{ '-active' : n.trim() === '' }"
-                  v-else
-                  :key="currentPlaceholder + 1"
-                >{{n}}</div>
-              </transition>
-            </span>
-          </template>
-        </label>
-        <div class="card-item__date" ref="cardDate">
-            <label :for="fields.cardMonth" class="card-item__dateTitle">{{ $t('card.expires') }}</label>
-            <label for="cardYear" class="card-item__dateItem">
-              <transition name="slide-fade-up">
-                <span v-if="labels.cardYear" :key="labels.cardYear">{{String(labels.cardYear).slice(0,4)}}</span>
-                <span v-else key="2">{{ $t('card.YY') }}</span>
-              </transition>
-            </label>
-          </div>
-        </div>
+      <div class="layoutLabels">
+        <span id="sectionLabel">STATS</span>
+      </div>
+      <div id="rearContent">
       <div class="card-item__cvv">
-        <div class="card-item__cvvTitle">CVV</div>
-        <div class="card-item__cvvBand">
-          <span v-for="(n, $index) in labels.cardCvv" :key="$index">*</span>
-        </div>
-        <div class="card-item__type">
-          <img
-            :src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + cardType + '.png'"
-            v-if="cardType"
-            class="card-item__typeImg"
-          />
-        </div>
+        <div class="card-item__cvvTitle">REALTOR® ID Number:</div>
+          <transition name="slide-fade-up">
+                <span id="realtorID" class="rearDataSpan"></span>
+              </transition>
+      </div>
+      <div class="card-item__cvv">
+        <div class="card-item__cvvTitle">Designations/Certifications:</div>
+          <transition name="slide-fade-up">
+                <span id="designations" class="rearDataSpan"></span>
+              </transition>
+      </div>
+      <div class="card-item__cvv">
+        <div class="card-item__cvvTitle">REALTOR® Since:</div>
+          <transition name="slide-fade-up">
+                <span class="rearDataSpan" v-if="labels.cardYear" :key="labels.cardYear">{{String(labels.cardYear).slice(0,4)}}</span>
+                <span class="rearDataSpan"></span>
+              </transition>
+      </div>
+      <div id="expandedArea" class="card-item__cvv">
+        <div class="card-item__cvvTitle">Business Background/Testimonials:</div>
+          <transition name="slide-fade-up">
+                <span id="businessBackground" class="rearDataSpan"></span>
+              </transition>
+      </div>
       </div>
     </div>
   </div>
@@ -154,7 +139,7 @@ export default {
         } else {
           this.currentFocus = element.id
         }
-        this.isCardFlipped = element.id === this.fields.cardCvv
+        this.isCardFlipped = (element.id === this.fields.cardCvv) || (element.id === this.fields.cardDesignations) || (element.id === this.fields.cardBusinessBackground) || (element.id === this.fields.cardYear) || (element.id === this.fields.cardRealtorID)
       })
       element.addEventListener('blur', () => {
         this.isCardFlipped = !element.id === this.fields.cardCvv

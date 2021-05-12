@@ -76,7 +76,6 @@ body {
     }
 
     &.-cvv {
-      max-width: 150px;
       @media screen and (max-width: 480px) {
         max-width: initial;
       }
@@ -169,7 +168,7 @@ body {
 
   &__focus {
     position: absolute;
-    z-index: 3;
+    z-index: 99;
     border-radius: 5px;
     left: 0;
     top: 0;
@@ -360,7 +359,6 @@ body {
     font-family: 'Arial', sans-serif;
     font-weight: 800;
     max-width: 100%;
-    overflow: hidden;
     text-overflow: ellipsis;
     @media screen and (max-width: 480px) {
       font-size: 16px;
@@ -482,7 +480,7 @@ body {
     text-align: right;
     position: relative;
     z-index: 2;
-    padding: 15px;
+    padding: 7px 15px;
     .card-item__type {
       opacity: 0.7;
     }
@@ -493,10 +491,13 @@ body {
   }
   &__cvvTitle {
     padding-right: 10px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 30px;
+    color: #000;
     margin-bottom: 5px;
+    margin-top: 15px;
   }
   &__cvvBand {
     height: 45px;
@@ -751,9 +752,10 @@ button:hover {
 
 #nameLabel {
   position: relative;
-  bottom: 10px;
-  left: 35px;
+  bottom: 26px;
+  left: 36px;
   text-shadow: none;
+  width: 263.5px;
 }
 
 #card-back-cover img {
@@ -763,8 +765,10 @@ button:hover {
 #betaWarning {
   color: red;
   font-size: 20px;
-  margin-left: 15px;
+  margin-left: 20px;
   font-family: 'Source Code Pro', sans-serif;
+  font-weight: 600;
+  position: absolute;
 }
 
 #cardUploadedPhoto {
@@ -776,4 +780,50 @@ button:hover {
   top: 17px;
   height: 360px;
   object-fit: cover;
+}
+
+#italicFirst {
+  font-weight: 500;
+  display: block;
+  font-size: 25px;
+  line-height: 1.1em;
+}
+
+#purchaseBtn {
+  cursor: not-allowed;
+}
+
+#purchaseBtn:hover {
+  filter: none;
+}
+
+#sectionLabel {
+  color: #000!important;
+  font-weight: 800;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.layoutLabels {
+  position: relative;
+  text-align: center;
+  width: max-content;
+  margin: auto;
+  top: 135px;
+  padding-right: 5px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#rearContent {
+  position: relative;
+  margin-top: 130px;
+}
+
+.rearDataSpan {
+  float: left;
+  margin-left: 30px;
+  text-align: left;
+  max-width: 280px;
+  word-break: break-word;
 }
