@@ -41,7 +41,7 @@
             <transition name="slide-fade-up">
               <div class="card-item__name" id="customNameHandler" v-if="labels.cardName.length" key="1">
               </div>
-              <div class="card-item__name" v-else key="2"><span id="italicFirst">Full</span>Name</div>
+              <div class="card-item__name" v-else key="2"><span id="italicFirst">First Name</span>Last Name</div>
             </transition>
           </label>
         </div>

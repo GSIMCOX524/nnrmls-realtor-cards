@@ -11,6 +11,8 @@
     </div>
     <div class="card-form__inner">
       <div class="card-input card-layout__options">
+        <button @click="switchToVertical" type="text" class="card-layout__options__button">Vertical</button> | <button @click="switchToHorizontal" type="text" class="card-layout__options__button">Horizontal</button>
+        <br><br>
         <button @click="flipCard" type="text" class="card-layout__options__button">Flip</button>
       </div>
         <div class="card-input">
@@ -202,13 +204,13 @@ export default {
     },
     switchToHorizontal () {
       var originalCardItem = document.getElementById('card-item-object')
-      originalCardItem.style.height = '318px'
-      originalCardItem.style.maxWidth = '445px'
+      originalCardItem.style.height = '375px'
+      originalCardItem.style.maxWidth = '525px'
     },
     switchToVertical () {
       var originalCardItem = document.getElementById('card-item-object')
-      originalCardItem.style.height = '445px'
-      originalCardItem.style.maxWidth = '318px'
+      originalCardItem.style.height = '525px'
+      originalCardItem.style.maxWidth = '375px'
     },
     updateFileLabel () {
       var photoUploadCustomTrigger = document.getElementById('photoUploadCustomTrigger')
