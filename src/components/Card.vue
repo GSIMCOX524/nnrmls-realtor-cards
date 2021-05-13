@@ -1,5 +1,6 @@
 <template>
-  <div id="card-item-object" class="card-item" :class="{ '-active' : isCardFlipped }">
+<div id="templateRoot">
+  <div id="card-item-object-vertical" class="card-item" :class="{ '-active' : isCardFlipped }">
     <div id="card-front-instance" class="card-item__side -front">
       <div
         class="card-item__focus"
@@ -9,9 +10,10 @@
       ></div>
       <div id="card-cover" class="card-item__cover">
         <img
-          v-if="currentCardBackgroundFront"
-          :src="currentCardBackgroundFront"
+          v-if="verticalCardBackgroundFront"
+          :src="verticalCardBackgroundFront"
           class="card-item__bg"
+          id="verticalCardBackgroundFront"
         />
       </div>
       <div class="card-item__wrapper">
@@ -50,9 +52,10 @@
     <div id="card-back-instance" class="card-item__side -back">
       <div id="card-back-cover" class="card-item__cover">
         <img
-          v-if="currentCardBackgroundBack"
-          :src="currentCardBackgroundBack"
+          v-if="verticalCardBackgroundBack"
+          :src="verticalCardBackgroundBack"
           class="card-item__bg"
+          id="verticalCardBackgroundBack"
         />
       </div>
       <div class="layoutLabels">
@@ -86,6 +89,93 @@
       </div>
       </div>
     </div>
+  </div>
+  <div id="card-item-object-horizontal" class="card-item" :class="{ '-active' : isCardFlipped }" style="display:none">
+    <div id="card-front-instance" class="card-item__side -front">
+      <div
+        class="card-item__focus"
+        :class="{'-active' : focusElementStyle }"
+        :style="focusElementStyle"
+        ref="focusElement"
+      ></div>
+      <div id="card-cover" class="card-item__cover">
+        <img
+          v-if="horizontalCardBackgroundFront"
+          :src="horizontalCardBackgroundFront"
+          class="card-item__bg"
+          id="horizontalCardBackgroundFront"
+        />
+      </div>
+      <div class="card-item__wrapper">
+        <div class="card-item__top">
+          <img
+            src="https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Card-Template-Photo-Placeholder.png"
+            id="cardUploadedPhoto"
+          />
+          <div class="card-item__type">
+            <transition name="slide-fade-up">
+              <img
+                :src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + cardType + '.png'"
+                v-if="cardType"
+                :key="cardType"
+                alt
+                class="card-item__typeImg"
+              />
+            </transition>
+          </div>
+        </div>
+        <div class="card-item__content">
+          <label :for="fields.cardName" id="nameLabel" class="card-item__info" :ref="fields.cardName">
+            <transition name="slide-fade-up">
+              <div class="card-item__name" id="customNameHandler" v-if="labels.cardName.length" key="1">
+              </div>
+              <div class="card-item__name" v-else key="2"><span id="italicFirst">First Name</span>Last Name</div>
+            </transition>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id="card-back-instance" class="card-item__side -back">
+      <div id="card-back-cover" class="card-item__cover">
+        <img
+          v-if="horizontalCardBackgroundBack"
+          :src="horizontalCardBackgroundBack"
+          class="card-item__bg"
+          id="horizontalCardBackgroundBack"
+        />
+      </div>
+      <div class="layoutLabels">
+        <span id="sectionLabel">STATS</span>
+      </div>
+      <div id="rearContent">
+      <div class="card-item__cvv">
+        <div class="card-item__cvvTitle">REALTOR® ID Number:</div>
+          <transition name="slide-fade-up">
+                <span id="realtorID" class="rearDataSpan"></span>
+              </transition>
+      </div>
+      <div class="card-item__cvv">
+        <div class="card-item__cvvTitle">Designations/Certifications:</div>
+          <transition name="slide-fade-up">
+                <span id="designations" class="rearDataSpan"></span>
+              </transition>
+      </div>
+      <div class="card-item__cvv">
+        <div class="card-item__cvvTitle">REALTOR® Since:</div>
+          <transition name="slide-fade-up">
+                <span class="rearDataSpan" v-if="labels.cardYear" :key="labels.cardYear">{{String(labels.cardYear).slice(0,4)}}</span>
+                <span class="rearDataSpan"></span>
+              </transition>
+      </div>
+      <div id="expandedArea" class="card-item__cvv">
+        <div class="card-item__cvvTitle">Business Background/Testimonials:</div>
+          <transition name="slide-fade-up">
+                <span id="businessBackground" class="rearDataSpan"></span>
+              </transition>
+      </div>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -181,11 +271,17 @@ export default {
 
       return '' // default type
     },
-    currentCardBackgroundFront () {
+    verticalCardBackgroundFront () {
       return 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Card-Template-Front.png'
     },
-    currentCardBackgroundBack () {
+    verticalCardBackgroundBack () {
       return 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Card-Template-Back.png'
+    },
+    horizontalCardBackgroundFront () {
+      return 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Horizontal-Card-Template-Front.png'
+    },
+    horizontalCardBackgroundBack () {
+      return 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Horizontal-Card-Template-Front.png'
     }
   },
   methods: {

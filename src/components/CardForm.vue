@@ -203,14 +203,24 @@ export default {
       return n < 10 ? `0${n}` : n
     },
     switchToHorizontal () {
-      var originalCardItem = document.getElementById('card-item-object')
-      originalCardItem.style.height = '375px'
-      originalCardItem.style.maxWidth = '525px'
+      var verticalLayout = document.getElementById('card-item-object-vertical')
+      var horizontalLayout = document.getElementById('card-item-object-horizontal')
+      verticalLayout.style.display = 'none'
+      horizontalLayout.style.display = 'block'
+      var horizontalCardBackgroundFront = document.getElementById('horizontalCardBackgroundFront')
+      horizontalCardBackgroundFront.src = 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Horizontal-Card-Template-Front.png'
+      var horizontalCardBackgroundBack = document.getElementById('horizontalCardBackgroundBack')
+      horizontalCardBackgroundBack.src = 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Horizontal-Card-Template-Back.png'
     },
     switchToVertical () {
-      var originalCardItem = document.getElementById('card-item-object')
-      originalCardItem.style.height = '525px'
-      originalCardItem.style.maxWidth = '375px'
+      var verticalLayout = document.getElementById('card-item-object-vertical')
+      var horizontalLayout = document.getElementById('card-item-object-horizontal')
+      verticalLayout.style.display = 'block'
+      horizontalLayout.style.display = 'none'
+      var verticalCardBackgroundFront = document.getElementById('verticalCardBackgroundFront')
+      verticalCardBackgroundFront.src = 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Card-Template-Front.png'
+      var verticalCardBackgroundBack = document.getElementById('verticalCardBackgroundBack')
+      verticalCardBackgroundBack.src = 'https://raw.githubusercontent.com/GSIMCOX524/nnrmls-realtor-cards/master/src/assets/images/Card-Template-Back.png'
     },
     updateFileLabel () {
       var photoUploadCustomTrigger = document.getElementById('photoUploadCustomTrigger')
@@ -316,11 +326,17 @@ export default {
       this.$emit('input-card-cvv', this.formData.cardCvv)
     },
     flipCard () {
-      var cardItemObject = document.getElementById('card-item-object')
-      if (cardItemObject.classList.contains('-active')) {
-        cardItemObject.classList.remove('-active')
+      var verticalCardItemObject = document.getElementById('card-item-object-vertical')
+      if (verticalCardItemObject.classList.contains('-active')) {
+        verticalCardItemObject.classList.remove('-active')
       } else {
-        cardItemObject.classList.add('-active')
+        verticalCardItemObject.classList.add('-active')
+      }
+      var horizontalCardItemObject = document.getElementById('card-item-object-horizontal')
+      if (horizontalCardItemObject.classList.contains('-active')) {
+        horizontalCardItemObject.classList.remove('-active')
+      } else {
+        horizontalCardItemObject.classList.add('-active')
       }
     },
     invaildCard () {
